@@ -1,0 +1,22 @@
+<header class="bg-blue-600 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Recipes for All</h1>
+    <nav>
+      <ul class="flex space-x-4 items-center">
+        <li><a routerLink="/" class="hover:underline">Home</a></li>
+        <li><a routerLink="/recipes/add" class="hover:underline">Add Recipe</a></li>
+        <li><a routerLink="/recipes" class="hover:underline">Recipes</a></li>
+
+        <ng-container *ngIf="currentUser$ | async as user; else loginLink">
+          <li><a routerLink="/profile" class="flex items-center">
+            <img [src]="user.photoURL" alt="Profile" class="w-8 h-8 rounded-full mr-2" />
+          </a></li>
+        </ng-container>
+
+        <ng-template #loginLink>
+          <li><a (click)="authService.loginWithGoogle()" class="hover:underline">Log in</a></li>
+        </ng-template>
+      </ul>
+    </nav>
+  </div>
+</header>

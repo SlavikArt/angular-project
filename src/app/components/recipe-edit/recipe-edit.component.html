@@ -1,0 +1,28 @@
+<div class="recipe-detail mx-auto mt-8">
+  <h2 class="text-2xl font-bold mb-4">Edit Recipe</h2>
+  <form [formGroup]="recipeForm" (ngSubmit)="updateRecipe()">
+    <div class="mb-4">
+      <label for="name" class="block text-sm font-medium text-gray-700">Recipe Name</label>
+      <input id="name" formControlName="name" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Enter recipe name" />
+      <div *ngIf="recipeForm.get('name')?.invalid && (recipeForm.get('name')?.touched || recipeForm.get('name')?.dirty)" class="text-red-600 text-sm">
+        Recipe name is required.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700">Recipe Description</label>
+      <textarea id="description" formControlName="description" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Enter recipe description"></textarea>
+      <div *ngIf="recipeForm.get('description')?.invalid && (recipeForm.get('description')?.touched || recipeForm.get('description')?.dirty)" class="text-red-600 text-sm">
+        Recipe description is required.
+      </div>
+    </div>
+
+    <button type="submit" class="mt-4 bg-blue-600 text-white p-2 rounded hover:bg-blue-700" [disabled]="recipeForm.invalid">
+      Update Recipe
+    </button>
+  </form>
+
+  <button (click)="router.navigate(['/recipes'])" class="mt-4 ml-2 text-gray-600 underline">
+    Cancel
+  </button>
+</div>

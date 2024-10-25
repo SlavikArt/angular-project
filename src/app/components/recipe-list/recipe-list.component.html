@@ -1,0 +1,27 @@
+<div class="p-4">
+  <h1 class="text-2xl font-bold mb-4">All Recipes</h1>
+  <div *ngIf="recipes$ | async as recipes; else loading">
+    <div *ngIf="recipes.length > 0; else noRecipes">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div *ngFor="let recipe of recipes" class="recipe-card" (click)="viewRecipe(recipe.id!)">
+          <h2 class="text-xl font-semibold line-clamp-2">{{ recipe.name }}</h2>
+          <p class="text-gray-600">{{ recipe.description | truncate:90 }}</p>
+          <p class="text-sm text-gray-500">By {{ recipe.username }}</p>
+          <img *ngIf="recipe.fileUrl" [src]="recipe.fileUrl" alt="{{ recipe.name }}" class="mt-2 w-full h-40 object-cover rounded">
+          <div *ngIf="currentUserId === recipe.createdBy" class="mt-4">
+            <button (click)="editRecipe(recipe.id!)" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Edit</button>
+            <button (click)="deleteRecipe(recipe.id!)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 mt-2">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading recipes...</p>
+  </ng-template>
+
+  <ng-template #noRecipes>
+    <p>No recipes found.</p>
+  </ng-template>
+</div>

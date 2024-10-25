@@ -1,0 +1,23 @@
+<div class="container mx-auto p-6 flex flex-col items-center">
+  <h2 class="text-4xl font-bold mb-6">User Profile</h2>
+  <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+    <ng-container *ngIf="user$ | async as user; else notLoggedIn">
+      <div class="flex items-center mb-4">
+        <img [src]="user.photoURL" alt="User Photo" class="w-24 h-24 rounded-full mr-4" *ngIf="user.photoURL" />
+        <div>
+          <p class="text-xl font-semibold">{{ user.displayName }}</p>
+          <p class="text-gray-500">{{ user.email }}</p>
+        </div>
+      </div>
+      <button (click)="logout()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+        Logout
+      </button>
+    </ng-container>
+  </div>
+  <ng-template #notLoggedIn>
+    <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md mt-6">
+      <p class="text-lg">You are not logged in. Please log in to access your profile.</p>
+      <app-login></app-login>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,10 @@
+<div class="recipe-detail">
+  <h1 class="text-2xl font-bold">{{ recipe?.name }}</h1>
+  <p class="text-gray-600">{{ recipe?.description }}</p>
+  <img *ngIf="recipe?.fileUrl" [src]="recipe?.fileUrl" alt="{{ recipe?.name }}" class="mt-4 w-full h-40 object-cover rounded">
+
+  <div *ngIf="currentUserId === recipe?.createdBy" class="mt-4">
+    <button (click)="editRecipe()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Edit</button>
+    <button (click)="deleteRecipe()" class="bg-red-500 text-white px-4 py-2 rounded mt-2 hover:bg-red-600">Delete</button>
+  </div>
+</div>
